@@ -1,0 +1,65 @@
+{
+  "name": "@ayasono/shared",
+  "version": "0.1.0",
+  "description": "ayasono プロジェクト共通インフラパッケージ（logger / JWT / Prisma 初期化 等）",
+  "type": "module",
+  "exports": {
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
+    },
+    "./discord": {
+      "types": "./dist/discord/index.d.ts",
+      "import": "./dist/discord/index.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src",
+    "lint:fix": "biome check --write src",
+    "format": "biome format --write src",
+    "format:check": "biome format src",
+    "prepare": "tsup"
+  },
+  "keywords": [
+    "ayasono",
+    "shared",
+    "discord",
+    "fastify"
+  ],
+  "author": "sonozaki",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "peerDependencies": {
+    "@fastify/cookie": "^11.0.0",
+    "@prisma/client": "^7.0.0",
+    "discord.js": "^14.0.0",
+    "fastify": "^5.0.0",
+    "i18next": "^26.0.0",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "winston-transport": "^4.9.0"
+  },
+  "peerDependenciesMeta": {
+    "@fastify/cookie": { "optional": true },
+    "discord.js": { "optional": true },
+    "fastify": { "optional": true }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
+    "@types/node": "^25.5.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.2"
+  }
+}

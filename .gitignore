@@ -1,0 +1,26 @@
+# 依存関係
+node_modules/
+
+# ビルド成果物
+dist/
+*.tsbuildinfo
+
+# 環境変数
+.env
+.env.*
+!.env.example
+
+# エディタ・ツール
+.cache/
+.claude/
+.vscode-test/
+
+# パッケージマネージャー
+.npm/
+*.tgz
+
+# OS生成ファイル
+*.pid
+*.seed
+*.pid.lock
+.DS_Store
