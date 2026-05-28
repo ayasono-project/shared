@@ -43,6 +43,7 @@
   "engines": {
     "node": ">=24"
   },
+  "packageManager": "pnpm@11.1.2",
   "peerDependencies": {
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0",
