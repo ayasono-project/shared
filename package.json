@@ -1,7 +1,7 @@
 {
   "name": "@ayasono/shared",
-  "version": "0.1.0",
-  "description": "ayasono プロジェクト共通インフラパッケージ（logger / JWT / Prisma 初期化 等）",
+  "version": "0.2.0",
+  "description": "ayasono プロジェクト共通インフラパッケージ（logger / errors / Discord webhook transport 等）",
   "type": "module",
   "exports": {
     "./core": {
@@ -23,11 +23,13 @@
   ],
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit",
-    "lint": "biome check src",
-    "lint:fix": "biome check --write src",
-    "format": "biome format --write src",
-    "format:check": "biome format src",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tests/tsconfig.json",
+    "lint": "biome check src tests",
+    "lint:fix": "biome check --write src tests",
+    "format": "biome format --write src tests",
+    "format:check": "biome format src tests",
     "prepare": "tsup"
   },
   "keywords": [
@@ -42,24 +44,18 @@
     "node": ">=24"
   },
   "peerDependencies": {
-    "@fastify/cookie": "^11.0.0",
-    "@prisma/client": "^7.0.0",
-    "discord.js": "^14.0.0",
-    "fastify": "^5.0.0",
-    "i18next": "^26.0.0",
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0",
     "winston-transport": "^4.9.0"
-  },
-  "peerDependenciesMeta": {
-    "@fastify/cookie": { "optional": true },
-    "discord.js": { "optional": true },
-    "fastify": { "optional": true }
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
     "@types/node": "^25.5.0",
     "tsup": "^8.5.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.6",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "winston-transport": "^4.9.0"
   }
 }
