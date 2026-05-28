@@ -31,8 +31,9 @@ jobs:
 
       - name: コミット済み dist が最新ビルドと一致するか検証（stale 検出）
         run: |
-          if ! git diff --exit-status -- dist; then
+          if [ -n "$(git status --porcelain -- dist)" ]; then
             echo "::error::コミット済み dist が最新ビルドと一致しません。pnpm build して dist をコミットし直してからタグを切り直してください。"
+            git status --porcelain -- dist
             exit 1
           fi
 
