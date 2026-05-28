@@ -1,0 +1,52 @@
+name: Release
+
+# タグ push 時に prebuilt tarball を生成し、GitHub Release に添付する。
+# 各アプリは Release の .tgz URL を依存に指定するため、インストール時ビルドは発生しない。
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and attach prebuilt tarball
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: 依存関係のインストール
+        run: pnpm install --frozen-lockfile
+
+      - name: リント
+        run: pnpm lint
+
+      - name: 型チェック
+        run: pnpm typecheck
+
+      - name: テスト実行
+        run: pnpm test
+
+      - name: ビルド
+        run: pnpm build
+
+      - name: tarball を生成（dist 同梱）
+        run: pnpm pack
+
+      - name: GitHub Release を作成して tarball を添付
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" ./*.tgz \
+            --title "${GITHUB_REF_NAME}" \
+            --notes "Prebuilt package for ${GITHUB_REF_NAME}. 各アプリは Release の .tgz URL を依存に指定する。"
