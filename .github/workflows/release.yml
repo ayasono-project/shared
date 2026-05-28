@@ -1,19 +1,17 @@
-name: Release
+name: Release Check
 
-# タグ push 時に prebuilt tarball を生成し、GitHub Release に添付する。
-# 各アプリは Release の .tgz URL を依存に指定するため、インストール時ビルドは発生しない。
+# 配布は「git タグ + コミット済み dist」方式。consumer は github:ayasono-project/shared#vX.Y.Z で取り込む。
+# タグ push 時に、コミット済み dist が最新ビルドと一致するか（stale 検出）と lint/typecheck/test を検証する。
+# tarball の生成・Release 添付は行わない。
 
 on:
   push:
     tags:
       - "v*"
 
-permissions:
-  contents: write
-
 jobs:
-  release:
-    name: Build and attach prebuilt tarball
+  verify:
+    name: Verify committed dist & tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -28,6 +26,16 @@ jobs:
       - name: 依存関係のインストール
         run: pnpm install --frozen-lockfile
 
+      - name: ビルド
+        run: pnpm build
+
+      - name: コミット済み dist が最新ビルドと一致するか検証（stale 検出）
+        run: |
+          if ! git diff --exit-status -- dist; then
+            echo "::error::コミット済み dist が最新ビルドと一致しません。pnpm build して dist をコミットし直してからタグを切り直してください。"
+            exit 1
+          fi
+
       - name: リント
         run: pnpm lint
 
@@ -36,17 +44,3 @@ jobs:
 
       - name: テスト実行
         run: pnpm test
-
-      - name: ビルド
-        run: pnpm build
-
-      - name: tarball を生成（dist 同梱）
-        run: pnpm pack
-
-      - name: GitHub Release を作成して tarball を添付
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "${GITHUB_REF_NAME}" ./*.tgz \
-            --title "${GITHUB_REF_NAME}" \
-            --notes "Prebuilt package for ${GITHUB_REF_NAME}. 各アプリは Release の .tgz URL を依存に指定する。"
