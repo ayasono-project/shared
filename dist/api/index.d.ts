@@ -138,6 +138,9 @@ interface StickyMessage {
 }
 interface TicketPanel {
     id: string;
+    /** チケットチャンネルを作成する親カテゴリ ID（パネルの識別キー） */
+    categoryId: string | null;
+    /** パネルメッセージを設置するチャンネル ID */
     channelId: string | null;
     staffRoleIds: string[];
     title: string;
