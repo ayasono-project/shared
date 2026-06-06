@@ -158,7 +158,8 @@ interface ReactionButton {
     label: string;
     emoji: string;
     style: ButtonStyle;
-    roleId: string | null;
+    /** 1 ボタンに付与/解除するロール（複数可）。bot ドメインの roleIds[] と一致。 */
+    roleIds: string[];
 }
 interface ReactionRolePanel {
     id: string;
