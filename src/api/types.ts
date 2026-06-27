@@ -148,6 +148,8 @@ export interface InactiveKickSettings {
   whitelistRoleIds: string[];
   whitelistUserIds: string[];
   mentionEnabled: boolean;
+  timezone: string;
+  runHour: number;
 }
 
 export interface UnverifiedKickSettings {
@@ -162,6 +164,8 @@ export interface UnverifiedKickSettings {
   notifyTemplate: string;
   exemptRoleIds: string[];
   mentionEnabled: boolean;
+  timezone: string;
+  runHour: number;
 }
 
 // ── Embed / パネル ───────────────────────────────

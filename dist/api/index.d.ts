@@ -107,6 +107,8 @@ interface InactiveKickSettings {
     whitelistRoleIds: string[];
     whitelistUserIds: string[];
     mentionEnabled: boolean;
+    timezone: string;
+    runHour: number;
 }
 interface UnverifiedKickSettings {
     enabled: boolean;
@@ -120,6 +122,8 @@ interface UnverifiedKickSettings {
     notifyTemplate: string;
     exemptRoleIds: string[];
     mentionEnabled: boolean;
+    timezone: string;
+    runHour: number;
 }
 interface EmbedField {
     name: string;
