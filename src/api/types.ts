@@ -147,6 +147,7 @@ export interface InactiveKickSettings {
   kickMessage: string;
   whitelistRoleIds: string[];
   whitelistUserIds: string[];
+  mentionEnabled: boolean;
 }
 
 export interface UnverifiedKickSettings {
@@ -160,6 +161,7 @@ export interface UnverifiedKickSettings {
   dmTemplate: string;
   notifyTemplate: string;
   exemptRoleIds: string[];
+  mentionEnabled: boolean;
 }
 
 // ── Embed / パネル ───────────────────────────────
