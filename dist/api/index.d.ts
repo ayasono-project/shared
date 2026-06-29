@@ -87,8 +87,10 @@ interface VcAutoRecruitSettings {
     channelId: string | null;
     message: string;
     embedEnabled: boolean;
-    /** 対象カテゴリID（ルート直下は "TOP"） */
+    /** 対象カテゴリID（ルート直下は "TOP"）移行期間中保持 */
     enabledCategoryIds: string[];
+    /** 対象 VC チャンネル ID allowlist */
+    enabledChannelIds: string[];
 }
 interface ActiveInvite {
     id: string;
