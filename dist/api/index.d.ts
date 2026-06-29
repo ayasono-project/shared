@@ -109,6 +109,9 @@ interface InactiveKickSettings {
     mentionEnabled: boolean;
     timezone: string;
     runHour: number;
+    trackMessage: boolean;
+    trackVoice: boolean;
+    trackReaction: boolean;
 }
 interface UnverifiedKickSettings {
     enabled: boolean;

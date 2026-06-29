@@ -1,6 +1,6 @@
 {
   "name": "@ayasono/shared",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "ayasono プロジェクト共通インフラパッケージ（logger / errors / Discord webhook transport 等）",
   "type": "module",
   "exports": {

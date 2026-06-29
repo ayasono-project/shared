@@ -150,6 +150,10 @@ export interface InactiveKickSettings {
   mentionEnabled: boolean;
   timezone: string;
   runHour: number;
+  // アクティビティ記録トリガー（デフォルトは全て true）
+  trackMessage: boolean;
+  trackVoice: boolean;
+  trackReaction: boolean;
 }
 
 export interface UnverifiedKickSettings {
